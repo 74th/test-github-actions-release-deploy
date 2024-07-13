@@ -11,14 +11,21 @@ jobs:
     name: Release Go Binary
     runs-on: ubuntu-latest
     strategy:
-      matrix:
-        goos:
-          linux:
-            goarch: [amd64, arm64, riscv64]
-          windows:
-            goarch: [amd64, arm64]
-          darwin:
-            goarch: [amd64, arm64]
+      include:
+        - goos: linux
+          goarch: amd64
+        - goos: linux
+          goarch: arm64
+        - goos: linux
+          goarch: riscv64
+        - goos: windows
+          goarch: amd64
+        - goos: windows
+          goarch: arm64
+        - goos: darwin
+          goarch: amd64
+        - goos: darwin
+          goarch: arm64
     steps:
       - uses: actions/checkout@v3
       - uses: wangyoucao577/go-release-action@v1
